@@ -18,3 +18,8 @@ def check_file(request):
         file_exists = fs.exists(filename)
         return render(request, 'fileupload/check.html', {'filename': filename, 'file_exists': file_exists})
     return render(request, 'fileupload/check.html')
+
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'fileupload/home.html')

@@ -7,3 +7,5 @@ urlpatterns = [
     path('upload/', views.upload_file, name='upload_file'),
     path('check/', views.check_file, name='check_file'),
 ]
+
+
