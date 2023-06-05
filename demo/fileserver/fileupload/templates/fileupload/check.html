@@ -1,0 +1,15 @@
+<form method="post" action="{% url 'fileupload:check_file' %}">
+    {% csrf_token %}
+    <input type="text" name="filename" placeholder="Enter filename">
+    <button type="submit">Check</button>
+  </form>
+  
+  {% if filename %}
+    <h3>Filename: {{ filename }}</h3>
+    {% if file_exists %}
+      <p>The file exists.</p>
+    {% else %}
+      <p>The file does not exist.</p>
+    {% endif %}
+  {% endif %}
+  
