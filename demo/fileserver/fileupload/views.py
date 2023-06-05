@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.core.files.storage import FileSystemStorage
 
 def upload_file(request):
@@ -16,10 +17,19 @@ def check_file(request):
         filename = request.POST['filename']
         fs = FileSystemStorage()
         file_exists = fs.exists(filename)
-        return render(request, 'fileupload/check.html', {'filename': filename, 'file_exists': file_exists})
+        if file_exists:
+            return render(request, 'fileupload/check.html', {'filename': filename, 'file_exists': file_exists, 'download_url': fs.url(filename)})
+        else:
+            return render(request, 'fileupload/check.html', {'filename': filename, 'file_exists': file_exists})
     return render(request, 'fileupload/check.html')
+ 
 
-from django.shortcuts import render
-
+ 
 def home(request):
     return render(request, 'fileupload/home.html')
+
+
+
+
+
+
