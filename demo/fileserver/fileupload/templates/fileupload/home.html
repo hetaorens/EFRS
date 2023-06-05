@@ -1,4 +1,52 @@
-<h1>Welcome to the File Server</h1>
+<body>
+    <div class="container">
+      <h1>Welcome to the EFRS</h1>
+  
+      <div class="button-container">
+        <a href="{% url 'fileupload:upload_file' %}">Upload File</a>
+        <a href="{% url 'fileupload:check_file' %}">Check File</a>
+      </div>
+    </div>
+  </body>
+  
 
-<a href="{% url 'fileupload:upload_file' %}">Upload File</a>
-<a href="{% url 'fileupload:check_file' %}">Check File</a>
+
+
+<style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    
+    h1 {
+      font-size: 48px;
+      margin-bottom: 40px;
+    }
+    
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .button-container a {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 20px;
+      text-decoration: none;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .button-container a:hover {
+      background-color: #0056b3;
+    }
+    </style>
+    

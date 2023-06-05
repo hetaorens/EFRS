@@ -1,5 +1,82 @@
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <input type="file" name="file">
-  <button type="submit">Upload</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Upload</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .custom-file-input {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      padding: 8px 16px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .custom-file-input input[type="file"] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      padding: 0;
+      font-size: 100px;
+      cursor: pointer;
+      opacity: 0;
+    }
+    
+    .submit-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    /* .hidden-input {
+  display: none;
+} */
+input[type="file"] {
+  display: none;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Upload File</h1>
+
+    <div class="form-container">
+      <form class="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="file-input" class="custom-file-input">Choose File</label>
+        <input id="file-input" type="file" name="file",class="hidden-input">
+        <button class="submit-button" type="submit">Upload</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
