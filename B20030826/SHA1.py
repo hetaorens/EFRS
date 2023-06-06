@@ -108,6 +108,7 @@ class SHA1:
                 d
         V2 = [a,b,c,d,e]
         return [(V[i]+V2[i])&0xFFFFFFFF for i in range(5)]
+    
     def hash(self,msg:Union[str,bytes]) -> str:
         padded_data = self.__padding_and_append(msg)
         B = [int(padded_data[i:i+64].hex(),16) for i in range(0,len(padded_data),64)]
