@@ -9,7 +9,7 @@ Description  :
 from typing import Union,List
 import struct
 
-class SHA1:
+class SHA1():
     __H = [0x67452301,0xEFCDAB89,0x98BADCFE,0x10325476,0xC3D2E1F0]
     __K = 0x00000000
     def __init__(self) -> None:
@@ -118,9 +118,9 @@ class SHA1:
         
         return ''.join(map(lambda x : "%08X" % x,V))
 
-if __name__ == "__main__":
-    a = SHA1().hash("1")
-    from hashlib import sha1
-    print(a)
-    print(sha1("1".encode()).hexdigest())
-    print(int(a,16))
+# if __name__ == "__main__":
+#     a = SHA1().hash("1")
+#     from hashlib import sha1
+#     print(a)
+#     print(sha1("1".encode()).hexdigest())
+#     print(int(a,16))

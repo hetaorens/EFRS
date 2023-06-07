@@ -8,6 +8,7 @@ def generate_search_token(keyword):
 
 search_token_map = {}
 
+
 def search_token_by_keyword(keyword, search_token_map):
     if keyword in search_token_map:
         return search_token_map[keyword]
