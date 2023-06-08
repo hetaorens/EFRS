@@ -2,7 +2,7 @@ import unittest
 import hashlib
 import SHA1
 
-testcase = ["sadwad","sdaw","2134","dsfaaeff"]
+testcase = ["sadwad","sdaw","2134","dsfaaeff","的饭卡还记得回复可见","3859274herfhdjkgiue39设计"]
 
 
 class Test(unittest.TestCase):
@@ -22,26 +22,11 @@ class Test(unittest.TestCase):
 
         testfunc = ""
         with open(filepath, 'rb') as file:
-            # while True:
-            #     # 以每次读取的块大小更新哈希对象
-            #     data = file.read(4096)  # 每次读取4096字节
-            #     if not data:
-            #         break
-            #     hashlib.sha1().update(data)
-            #     testfunc =testfunc + SHA1.SHA1().hash(data).lower()
             data = file.read()
-            hashlib.sha1().update(data)
             testfunc = SHA1.SHA1().hash(data).lower()
-        
-        standard = hashlib.sha1().hexdigest()
-
-        print(type(standard))
-        print(type(testfunc))
-        
+            standard = hashlib.sha1(data).hexdigest()
         self.assertEqual(standard, testfunc)
-
-
-
+    
 
     def test_02(self):
         for i in testcase:
@@ -50,13 +35,84 @@ class Test(unittest.TestCase):
             b = hashlib.sha1(i.encode()).hexdigest()
             self.assertEqual(a,b)
 
+            
+    def test_03(self):
+            print("003")
+            filepath = "job1.py"
 
+            testfunc = ""
+            with open(filepath, 'rb') as file:
+                data = file.read()
+                testfunc = SHA1.SHA1().hash(data).lower()
+                standard = hashlib.sha1(data).hexdigest()
+        
+            self.assertEqual(standard, testfunc)
+    
+    def test_04(self):
+            print("004")
+            filepath = r"D:\github\EFRS\testcase\4.zip"
+
+            testfunc = ""
+            with open(filepath, 'rb') as file:
+                data = file.read()
+                testfunc = SHA1.SHA1().hash(data).lower()
+                standard = hashlib.sha1(data).hexdigest()
+        
+            self.assertEqual(standard, testfunc)
+    
+    def test_05(self):
+            print("005")
+            filepath = r"D:\github\EFRS\testcase\1.jpg"
+
+            testfunc = ""
+            with open(filepath, 'rb') as file:
+                data = file.read()
+                testfunc = SHA1.SHA1().hash(data).lower()
+                standard = hashlib.sha1(data).hexdigest()
+        
+            self.assertEqual(standard, testfunc)
+
+    def test_06(self):
+                print("006")
+                filepath = r"D:\github\EFRS\testcase\2.dat"
+
+                testfunc = ""
+                with open(filepath, 'rb') as file:
+                    data = file.read()
+                    testfunc = SHA1.SHA1().hash(data).lower()
+                    standard = hashlib.sha1(data).hexdigest()
+            
+                self.assertEqual(standard, testfunc)
+
+    def test_07(self):
+            print("007")
+            filepath = r"D:\github\EFRS\testcase\3.md"
+
+            testfunc = ""
+            with open(filepath, 'rb') as file:
+                data = file.read()
+                testfunc = SHA1.SHA1().hash(data).lower()
+                standard = hashlib.sha1(data).hexdigest()
+        
+            self.assertEqual(standard, testfunc)
+
+    def test_08(self):
+            print("008")
+            filepath = r"D:\github\EFRS\testcase\Xftp.exe"
+
+            testfunc = ""
+            with open(filepath, 'rb') as file:
+                data = file.read()
+                testfunc = SHA1.SHA1().hash(data).lower()
+                standard = hashlib.sha1(data).hexdigest()
+        
+            self.assertEqual(standard, testfunc)
 
 
 
 if __name__ == '__main__':
     suite = unittest.TestSuite()
-    test = [Test("test_01"),Test("test_02")]
+    test = [Test("test_01"),Test("test_02"),Test("test_03"),Test("test_04"),Test("test_05"),Test("test_06"),Test("test_07"),Test("test_08")]
 
     suite.addTests(test)
     with open('UnittestTextReport.txt', 'a') as f:

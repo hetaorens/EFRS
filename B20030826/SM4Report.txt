@@ -1,14 +1,24 @@
-test_01 (__main__.TestCase) ... FAIL
-
-======================================================================
-FAIL: test_01 (__main__.TestCase)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "d:\github\EFRS\B20030826\testSM4.py", line 24, in test_01
-    self.assertEqual(standard, testfunc)
-AssertionError: b'9f[^\x9a\xa8\x13r\x93\x9b\xe6nW\xba<\xdb' != b'\xe8h\xfeB\x05KuJ U1\x81\xa8\xb9\xc5\xb0'
+test_01 (__main__.TestCase) ... ok
 
 ----------------------------------------------------------------------
-Ran 1 test in 0.004s
+Ran 1 test in 0.002s
 
-FAILED (failures=1)
+OK
+test_01 (__main__.TestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK
+test_01 (__main__.TestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 17.478s
+
+OK
+test_01 (__main__.TestCase) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 60.542s
+
+OK

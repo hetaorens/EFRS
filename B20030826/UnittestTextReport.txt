@@ -1,52 +1,13 @@
-test_01 (__main__.Test) ... FAIL
+test_01 (__main__.Test) ... ok
 test_02 (__main__.Test) ... ok
-
-======================================================================
-FAIL: test_01 (__main__.Test)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "d:\github\EFRS\B20030826\test.py", line 39, in test_01
-    self.assertEqual(standard, testfunc)
-AssertionError: 'da39a3ee5e6b4b0d3255bfef95601890afd80709' != '6b3e4d873fa64599330fff72ae06371a2eb6374d6[795 chars]b5f0'
-Diff is 887 characters long. Set self.maxDiff to None to see it.
+test_03 (__main__.Test) ... ok
+test_04 (__main__.Test) ... ok
+test_05 (__main__.Test) ... ok
+test_06 (__main__.Test) ... ok
+test_07 (__main__.Test) ... ok
+test_08 (__main__.Test) ... ok
 
 ----------------------------------------------------------------------
-Ran 2 tests in 0.482s
+Ran 8 tests in 14.751s
 
-FAILED (failures=1)
-test_01 (__main__.Test) ... FAIL
-test_02 (__main__.Test) ... ok
-
-======================================================================
-FAIL: test_01 (__main__.Test)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "d:\github\EFRS\B20030826\test.py", line 41, in test_01
-    self.assertEqual(standard, testfunc)
-AssertionError: 'da39a3ee5e6b4b0d3255bfef95601890afd80709' != '553bfb28949f498dda069cb8a6dae970d3484fce'
-- da39a3ee5e6b4b0d3255bfef95601890afd80709
-+ 553bfb28949f498dda069cb8a6dae970d3484fce
-
-
-----------------------------------------------------------------------
-Ran 2 tests in 0.459s
-
-FAILED (failures=1)
-test_01 (__main__.Test) ... FAIL
-test_02 (__main__.Test) ... ok
-
-======================================================================
-FAIL: test_01 (__main__.Test)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "d:\github\EFRS\B20030826\test.py", line 41, in test_01
-    self.assertEqual(standard, testfunc)
-AssertionError: 'da39a3ee5e6b4b0d3255bfef95601890afd80709' != '553bfb28949f498dda069cb8a6dae970d3484fce'
-- da39a3ee5e6b4b0d3255bfef95601890afd80709
-+ 553bfb28949f498dda069cb8a6dae970d3484fce
-
-
-----------------------------------------------------------------------
-Ran 2 tests in 0.462s
-
-FAILED (failures=1)
+OK
