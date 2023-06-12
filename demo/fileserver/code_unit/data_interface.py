@@ -9,31 +9,6 @@
             byte : sha1_code 文件的hash结果
         """
 
-
-# sha1_code =hashlib.sha1(file_content).hexdigest()
-
-# from gmssl import sm4
-# b = sm4.CryptSM4()
-# print(sha1_code)
-
-# import binascii
-# b.set_key(binascii.a2b_hex(sha1_code),mode=sm4.SM4_ENCRYPT)
-# encode_msg= b.crypt_cbc(bytes.fromhex("F"*32),file_content)
-
-# import os
-# os.chdir('media')
-# try: 
-#     f=open(sha1_code,"r") 
-#     print("文件存在")
-# except FileNotFoundError:
-
-#     f=open(sha1_code,"wb")
-#     f.write(encode_msg)
-# #example end
-# pass
-
-
-
 import os
 from SHA1 import SHA1
 from SM4 import SM4
@@ -45,7 +20,6 @@ def encrypt(file_content):
     sha1_code = s.hash(file_content)
     print(sha1_code)
     
-
     try:
         os.chdir('media')
     except:
@@ -58,20 +32,40 @@ def encrypt(file_content):
     except FileNotFoundError:
 
         f=open(sha1_code,"wb")
-        encode_msg = sm4_encrypt(file_content, sha1_code)
+        a = SM4()
+        encode_msg = a.encrypt_cbc(file_content, sha1_code)
         f.write(encode_msg)
         state = 0
 
 
-def sm4_encrypt(file_content, sha1_code):
-
+def sm4_decrypt(file_content, sha1_code):
     a = SM4()
-    encode_msg = a.encrypt_cbc(file_content, sha1_code)
+    msg = a.decrypt_cbc(file_content, sha1_code)
+    return msg
+
+def decrypt(filename):
+    try:
+        os.chdir('media')
+    except:
+        pass
+      
+    with open(filename,"rb") as f:
+        msg = f.read()
+        decode_msg = sm4_decrypt(msg, filename)
+
+    try:
+        with open("temp", "wb") as f:
+            f.write(decode_msg)
+    except IOError:
+        print("tmp文件写入失败")
     
-    return encode_msg
 
 
-# if __name__ == '__main__':
-#     with open(r"D:\360MoveData\Users\mia san mia\Desktop\2\1.md",'r') as f:
-#         data = f.read()
-#         encrypt(data)
+# if __name__ == "__main__":
+#     with open(r"D:\360MoveData\Users\mia san mia\Desktop\2\1.md", 'r') as f:
+#         filecontent = f.read()
+#         encrypt(filecontent)        
+#     filename = "EFBB33E729E1F73E687B3F3E3520115E078A5696"
+#     decrypt(filename)
+
+ 
