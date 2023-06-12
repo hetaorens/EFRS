@@ -1,24 +1,3 @@
-<!-- <form method="post" action="{% url 'fileupload:check_file' %}">
-  {% csrf_token %}
-  <input type="text" name="filename" placeholder="Enter filename">
-  <button type="submit">Check</button>
-</form>
-
-{% if filename %}
-<h3>Filename: {{ filename }}</h3>
-{% if file_exists %}
-<p>The file exists.</p>
-<a href="{{ download_url }}">Download</a>
-{% else %}
-<p>The file does not exist.</p>
-{% endif %}
-{% endif %}
-<button class="goback-button" onclick="goBack()">Go Back</button> -->
-
-
-
-
-
 <body>
   <div class="container">
     <h1>Welcome to the EFRS</h1>
@@ -52,7 +31,8 @@
 
 <script>
 function goBack() {
-  window.history.back();
+  window.location.href='/';
+  // window.history.back();
 }
 </script>
 

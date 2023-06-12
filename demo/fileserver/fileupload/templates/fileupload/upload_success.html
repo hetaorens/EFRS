@@ -1,83 +1,65 @@
-<!-- <h1>File uploaded successfully!</h1> -->
-
-
-
-
-
-
-
 <body>
-    <div class="container">
-      <h1>Welcome to the EFRS</h1>
-  
-      <div class="button-container">
-        <!-- <a href="{% url 'fileupload:upload_file' %}">Upload File</a> -->
-        <!-- <a href="{% url 'fileupload:check_file' %}">Check File</a> -->
-        <h1>File uploaded successfully!</h1>
-        <button class="goback-button" onclick="goBack()">Go Back</button>
-      </div>
+  <div class="container">
+    <h1>File uploaded successfully!</h1>
+    <div class="button-container">
+      
+      <h1>SHA-1: {{ sha1 }}</h1>  <!-- 显示SHA-1哈希值 -->
+      <button class="goback-button" onclick="goBack()">Go Back</button>
     </div>
-  </body>
-  
-
-
-
-
+  </div>
+</body>
 
 <script>
 function goBack() {
-  window.history.back();
+  window.location.href='/';
 }
 </script>
 
-
-
-
-
+<style>
+.goback-button {
+  background-color: #a1f1f1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+</style>
 
 <style>
-  .goback-button {
-    background-color: #a1f1f1;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  </style>
-<style>
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      font-family: Arial, sans-serif;
-    }
-    
-    h1 {
-      font-size: 48px;
-      margin-bottom: 40px;
-    }
-    
-    .button-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-    }
-    
-    .button-container a {
-      display: inline-block;
-      padding: 12px 24px;
-      font-size: 20px;
-      text-decoration: none;
-      background-color: #007bff;
-      color: #fff;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
-    }
-    
-    .button-container a:hover {
-      background-color: #0056b3;
-    }
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 40px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.button-container a {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 20px;
+  text-decoration: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.button-container a:hover {
+  background-color: #0056b3;
+}
+</style>
