@@ -24,6 +24,7 @@ def upload_file(request):
         Returns:
             _type_: _description_
             byte : sha1_code 文件的hash结果
+            state : 是否存在文件的状态
         """
         #example
         import hashlib
@@ -39,15 +40,17 @@ def upload_file(request):
         try: 
             f=open(sha1_code,"r") 
             print("文件存在")
+            state=1
         except FileNotFoundError:
 
             f=open(sha1_code,"wb")
             f.write(encode_msg)
+            state=0
         #example end
         pass
 
         
-        return render(request, 'fileupload/upload_success.html',{"sha1":sha1_code})
+        return render(request, 'fileupload/upload_success.html',{"sha1":sha1_code,"state":state})
     return render(request, 'fileupload/upload.html')  
 
 
