@@ -10,8 +10,9 @@
         """
 
 import os
-from SHA1 import SHA1
-from SM4 import SM4
+
+from code_unit.SHA1 import SHA1
+from code_unit.SM4 import SM4
 
 
 
@@ -36,6 +37,8 @@ def encrypt(file_content):
         encode_msg = a.encrypt_cbc(file_content, sha1_code)
         f.write(encode_msg)
         state = 0
+
+    return sha1_code,state
 
 
 def sm4_decrypt(file_content, sha1_code):

@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import render, HttpResponse
 from django.core.files.storage import FileSystemStorage
+from code_unit import data_interface
+
 def upload_file(request):
     if request.method == 'POST' and request.FILES['file']:
         file = request.FILES['file']
@@ -14,7 +16,7 @@ def upload_file(request):
         # print(file_content)
         # print(f"SHA1 is :{sha1_code}")
         print(type(file))
-        import code_unit
+        
         """_summary_
         do something:
         存取文件通过hash加密,
@@ -26,32 +28,33 @@ def upload_file(request):
             state : 是否存在文件的状态
         """
         #example
-        import hashlib
-        sha1_code =hashlib.sha1(file_content).hexdigest()
-        from gmssl import sm4
-        b = sm4.CryptSM4()
-        print(sha1_code)
-        import binascii
-        b.set_key(binascii.a2b_hex(sha1_code),mode=sm4.SM4_ENCRYPT)
-        encode_msg= b.crypt_cbc(bytes.fromhex("F"*32),file_content)
-        import os
-        print(os.getcwd())
-        try:
-            os.chdir('media')
-        except:
-            pass
-        try: 
-            f=open(sha1_code,"r") 
-            print("文件存在")
-            state=1
-        except FileNotFoundError:
+        # import hashlib
+        # sha1_code =hashlib.sha1(file_content).hexdigest()
+        # from gmssl import sm4
+        # b = sm4.CryptSM4()
+        # print(sha1_code)
+        # import binascii
+        # b.set_key(binascii.a2b_hex(sha1_code),mode=sm4.SM4_ENCRYPT)
+        # encode_msg= b.crypt_cbc(bytes.fromhex("F"*32),file_content)
+        # import os
+        # print(os.getcwd())
+        # try:
+        #     os.chdir('media')
+        # except:
+        #     pass
+        # try: 
+        #     f=open(sha1_code,"r") 
+        #     print("文件存在")
+        #     state=1
+        # except FileNotFoundError:
 
-            f=open(sha1_code,"wb")
-            f.write(encode_msg)
-            state=0
+        #     f=open(sha1_code,"wb")
+        #     f.write(encode_msg)
+        #     state=0
         
-        #example end
-        pass
+        # #example end
+        # pass
+        sha1_code,state = data_interface.encrypt(file_content)
 
         
         return render(request, 'fileupload/upload_success.html',{"sha1":sha1_code,"state":state})
@@ -65,22 +68,23 @@ def check_file(request):
         fs = FileSystemStorage()
         file_exists = fs.exists(filename)
         if file_exists:
-            import os
-            try:
-                os.chdir('media')
-            except:
-                pass
-            from gmssl import sm4
-            b = sm4.CryptSM4()
-            print(filename)
-            import binascii
-            b.set_key(binascii.a2b_hex(filename),mode=sm4.SM4_DECRYPT)
-            # encode_msg= b.crypt_cbc(bytes.fromhex("F"*32),file_content)
-            print(fs.url(filename))
-            decode_msg=b.crypt_cbc(bytes.fromhex("F"*32),open(filename,"rb").read())
-            print(decode_msg)
-            with open("temp","wb") as f:
-                f.write(decode_msg)
+            # import os
+            # try:
+            #     os.chdir('media')
+            # except:
+            #     pass
+            # from gmssl import sm4
+            # b = sm4.CryptSM4()
+            # print(filename)
+            # import binascii
+            # b.set_key(binascii.a2b_hex(filename),mode=sm4.SM4_DECRYPT)
+            # # encode_msg= b.crypt_cbc(bytes.fromhex("F"*32),file_content)
+            # print(fs.url(filename))
+            # decode_msg=b.crypt_cbc(bytes.fromhex("F"*32),open(filename,"rb").read())
+            # print(decode_msg)
+            # with open("temp","wb") as f:
+            #     f.write(decode_msg)
+            data_interface.decrypt(filename)
             return render(request, 'fileupload/check.html', {'filename': filename, 'file_exists': file_exists, 'download_url': fs.url("temp")})
         else:
             return render(request, 'fileupload/check.html', {'filename': filename, 'file_exists': file_exists})
