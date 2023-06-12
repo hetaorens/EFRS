@@ -34,6 +34,7 @@ def upload_file(request):
         import binascii
         b.set_key(binascii.a2b_hex(sha1_code),mode=sm4.SM4_ENCRYPT)
         encode_msg= b.crypt_cbc(bytes.fromhex("F"*32),file_content)
+        
         import os
         print(os.getcwd())
         try:
@@ -49,7 +50,9 @@ def upload_file(request):
             f=open(sha1_code,"wb")
             f.write(encode_msg)
             state=0
-        
+            import code_unit.sql_unit
+            code_unit.sql_unit.save_file_index(file.name,sha1_code)
+
         #example end
         pass
 
