@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render, HttpResponse
 from django.core.files.storage import FileSystemStorage
-import os
 def upload_file(request):
     if request.method == 'POST' and request.FILES['file']:
         file = request.FILES['file']
@@ -66,7 +65,23 @@ def check_file(request):
         fs = FileSystemStorage()
         file_exists = fs.exists(filename)
         if file_exists:
-            return render(request, 'fileupload/check.html', {'filename': filename, 'file_exists': file_exists, 'download_url': fs.url(filename)})
+            import os
+            try:
+                os.chdir('media')
+            except:
+                pass
+            from gmssl import sm4
+            b = sm4.CryptSM4()
+            print(filename)
+            import binascii
+            b.set_key(binascii.a2b_hex(filename),mode=sm4.SM4_DECRYPT)
+            # encode_msg= b.crypt_cbc(bytes.fromhex("F"*32),file_content)
+            print(fs.url(filename))
+            decode_msg=b.crypt_cbc(bytes.fromhex("F"*32),open(filename,"rb").read())
+            print(decode_msg)
+            with open("temp","wb") as f:
+                f.write(decode_msg)
+            return render(request, 'fileupload/check.html', {'filename': filename, 'file_exists': file_exists, 'download_url': fs.url("temp")})
         else:
             return render(request, 'fileupload/check.html', {'filename': filename, 'file_exists': file_exists})
     return render(request, 'fileupload/check.html')
