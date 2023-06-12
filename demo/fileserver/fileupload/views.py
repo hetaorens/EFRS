@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render, HttpResponse
 from django.core.files.storage import FileSystemStorage
-
+import os
 def upload_file(request):
     if request.method == 'POST' and request.FILES['file']:
         file = request.FILES['file']
@@ -36,7 +36,11 @@ def upload_file(request):
         b.set_key(binascii.a2b_hex(sha1_code),mode=sm4.SM4_ENCRYPT)
         encode_msg= b.crypt_cbc(bytes.fromhex("F"*32),file_content)
         import os
-        os.chdir('media')
+        print(os.getcwd())
+        try:
+            os.chdir('media')
+        except:
+            pass
         try: 
             f=open(sha1_code,"r") 
             print("文件存在")
@@ -46,6 +50,7 @@ def upload_file(request):
             f=open(sha1_code,"wb")
             f.write(encode_msg)
             state=0
+        
         #example end
         pass
 

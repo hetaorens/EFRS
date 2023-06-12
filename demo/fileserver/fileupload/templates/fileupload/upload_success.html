@@ -1,9 +1,10 @@
 <body>
   <div class="container">
-    <h1>File uploaded successfully!</h1>
+    <h1>File uploaded {{state}}</h1>
     <div class="button-container">
-      
-      <h1>SHA-1: {{ sha1 }}</h1>  <!-- 显示SHA-1哈希值 -->
+      {% if state == 0 %}
+        <h1>SHA-1: {{ sha1 }}</h1>
+      {% endif %}
       <button class="goback-button" onclick="goBack()">Go Back</button>
     </div>
   </div>
