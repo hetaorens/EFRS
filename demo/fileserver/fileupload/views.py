@@ -55,7 +55,7 @@ def upload_file(request):
         # #example end
         # pass
         sha1_code,state = data_interface.encrypt(file_content)
-
+        state="Success" if state==0 else "Failed"
         
         return render(request, 'fileupload/upload_success.html',{"sha1":sha1_code,"state":state})
     return render(request, 'fileupload/upload.html')  

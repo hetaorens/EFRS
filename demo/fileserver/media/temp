@@ -1,0 +1,162 @@
+import sys
+import os
+class student:
+    def __init__(self, name: str, A: float, B: float, C: float, TOL: float):
+        self.name = name
+        self.A = A
+        self.B = B
+        self.C = C
+        self.TOL = TOL
+        self.V = ""
+
+    def display(self, mode=""):
+        if mode == "":
+            return "{:<8}{:<8.1f}{:<8.1f}{:<8.1f}{:<8.2f}{:<12}".format(self.name, self.A, self.B, self.C, self.TOL, self.V)
+        elif mode == "TOL_V":
+            return "{:<8}{:<8.2f}{:<12}".format(self.name, self.TOL, self.V)
+
+
+
+
+
+def students_init(data: list):
+    students = []
+    LEV = {10: "优", 9: "优", 8: "良", 7: "中", 6: "及格"}
+    for i in data:
+        name, (A, B, C) = i[0], (map(float, i[1:]))
+        TOL = sum([_i * _w for _i, _w in zip([0.3, 0.3, 0.4], [A, B, C])])
+        L = TOL//10
+        s = student(name, A, B, C, TOL)
+        try:
+            s.V = LEV[L]
+        except:
+            s.V = "不及格"
+        # print(name,A,B,C,/)
+        students.append(s)
+    print("初始化成功")
+    return students
+
+
+def student_input():
+    def IsNum(str: str):
+        if str.isdigit():
+            return True
+        s = str.split('.')
+        if len(s) > 2:
+            return False
+        else:
+            for si in s:
+                if not si.isdigit():
+                    return False
+            return True
+    print("请输入学生的学号和3样成绩以空格为间隔(q退出)")
+    cnt = 1
+    data = []
+    while True:
+        try:
+            x = input("第{}次输入: ".format(cnt)).split()
+            if x == ['q']:
+                return data
+            if len(x) != 4 and all(IsNum(_) for _ in x):
+                print("请输入规范的数据!(回车继续)")
+                input()
+                continue
+            data.append(x)
+            cnt += 1
+        except:
+            pass
+
+
+def load():
+    global data
+    x = input("请选择1.手动录入 2.文件录入 : ")
+    if x == "1":
+        data = student_input()
+    elif x == "2":
+        data = load_file(input("请输入文件名: "))
+    else:
+        pass
+    global students
+    students = students_init(data)
+def save():
+    print("请输入保存的文件名称")
+    x = input()
+    stor_file(x, students)
+    pass
+def load_file(filename: str):
+    with open(os.path.join(os.getcwd(),filename), 'r') as f:
+        # print(sys.path[0])
+        print("读取成功")
+        student_data = f.read()
+        return [_.split() for _ in student_data.split('\n')][1:-1]
+
+
+def stor_file(filename, data: list):
+    with open(filename, 'w') as f:
+        print("存储成功")
+        f.writelines([i.display()+"\n" for i in data])
+
+
+
+
+
+def search():
+    print("请选择查询方式\n1.按学号查询\n2.按等级查询")
+    x = input("请输入: ")
+    if x == "1":
+        id_ = input("请输入学号: ")
+        print("\n".join([i.display() for i in students if i.name == id_]))
+    if x == "2":
+        L = input("请输入等级: ")
+        print("\n".join([i.display() for i in students if i.V == L]))
+    else:
+        pass
+    pass
+def ansly():
+    print("1.获取平均总分数")
+    print("2.获取等级百分比")
+    print("3.按总分数排序")
+    print("4.获取全部信息")
+    x = input("请输入: ")
+    if x == "1":
+        ave_total = sum(i.TOL for i in students)/len(students)
+        print("平均分为{:.2f}".format(ave_total))
+    elif x == "2":
+        counter = __import__("collections").Counter([i.V for i in students])
+        lens = len(students)
+        print("优等级人数为{},占比为{:.2%}".format(counter["优"], counter["优"]/lens))
+        print("良等级人数为{},占比为{:.2%}".format(counter["良"], counter["良"]/lens))
+        print("中等级人数为{},占比为{:.2%}".format(counter["中"], counter["中"]/lens))
+        print("及格等级人数为{},占比为{:.2%}".format(counter["及格"], counter["及格"]/lens))
+        print("不及格等级人数为{},占比为{:.2%}".format(
+            counter["不及格"], counter["不及格"]/lens))
+    elif x == "3":
+        Y = sorted(students, key=lambda x: x.TOL, reverse=True)
+        for i in Y:
+            print(i.display(mode="TOL_V"))
+    elif x == "4":
+        for i in students:
+            print(i.display())
+    else:
+        pass
+
+
+if __name__ == "__main__":
+    data = []
+    students = []
+    while True:
+        print("1.录入成绩")
+        print("2.查询成绩")
+        print("3.总体分析")
+        print("4.保存成绩")
+        x = input()
+        if x == "1":
+            load()
+        elif x == "2":
+            search()
+        elif x == "3":
+            ansly()
+        elif x == "4":
+            save()
+        else:
+            exit()

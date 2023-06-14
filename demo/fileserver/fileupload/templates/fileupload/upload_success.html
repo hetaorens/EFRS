@@ -2,7 +2,7 @@
   <div class="container">
     <h1>File uploaded {{state}}</h1>
     <div class="button-container">
-      {% if state == 0 %}
+      {% if state == "Success" %}
         <h1>SHA-1: {{ sha1 }}</h1>
       {% endif %}
       <button class="goback-button" onclick="goBack()">Go Back</button>
